@@ -1,0 +1,139 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% load candidate_extras %}
+{% block title %}All Candidates{% endblock %}
+{% block css %}
+		<!-- Bootstrap css -->
+		<link rel="stylesheet" href="{% static 'assets/plugins/bootstrap/css/bootstrap.min.css' %}">
+
+		<!-- Internal Data table css -->
+		<link href="{% static 'assets/plugins/datatable/css/dataTables.bootstrap4.min.css' %}" rel="stylesheet" />
+		<link href="{% static 'assets/plugins/datatable/css/buttons.bootstrap4.min.css' %}" rel="stylesheet">
+		<link href="{% static 'assets/plugins/datatable/css/responsive.bootstrap4.min.css' %}" rel="stylesheet" />
+		<link href="{% static 'assets/plugins/datatable/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+		<link href="{% static 'assets/plugins/datatable/css/responsive.dataTables.min.css' %}" rel="stylesheet">
+		<link href="{% static 'assets/plugins/select2/css/select2.min.css' %}" rel="stylesheet">
+
+
+		<link href="{% static 'assets/css/ATS/internal_candidates.css' %}" rel="stylesheet">
+		<style>
+			.dataTables_filter {
+			   display: none;
+			}
+		</style>
+
+{% endblock %}
+{% block main %}
+				<!-- Container-fluid -->
+				<div class="container-fluid">
+					<input type="text" id="searchbox">
+					<!-- Main-content-body -->
+					<div class="main-content-body">
+						<!-- row opened -->
+						<div class="row row-sm">
+							<div class="col-xl-12">
+								<div class="card candidate_table_main_section">
+									<div class="card-header pb-0">
+										<div class="d-flex justify-content-between">
+											<h4 class="card-title mg-b-0">Candidate</h4>
+											<div class="candidate_right_filters_section">
+												<div class="candidate_filters_header">
+													<a href=""><i class="fas fa-file-download"></i></a>
+												</div>
+												<div class="candidate_filters_header">	
+													<a href=""><i class="fas fa-ellipsis-v"></i></a>
+												</div>
+												<div class="candidate_filters_header">
+													<a href=""><i class="fas fa-filter"></i></a>
+												</div>
+												<div class="candidate_filters_header">
+													<a href=""><i class="fas fa-print"></i></a>
+												</div>
+												<div class="candidate_filters_header">	
+													<a href=""><i class="fas fa-sort-alpha-down"></i></a>
+												</div>
+											</div>
+										</div>
+										
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<table class="table text-md-nowrap candidate_table" id="example1">
+												<thead>
+													<tr>
+														<th class="border-bottom-0">Name</th>
+														<th class="border-bottom-0">Job Title</th>
+														<th class="border-bottom-0">total experience</th>
+														<th class="border-bottom-0">ex-salary</th>
+														<th class="border-bottom-0">last updated</th>
+														<th class="border-bottom-0">Notice period</th>
+														<th class="border-bottom-0">City</th>
+														<th class="border-bottom-0">Source</th>
+														<th class="border-bottom-0">Action</th>
+													</tr>
+													
+												</thead>
+												<tbody>
+												{% for candidate in candidates %}
+													<tr>
+														<td>{{candidate.name}}</td>
+														<td>{{candidate.job_title}}</td>
+														<td>{{candidate.experience}}</td>
+														<td>{{candidate.expected_salary}}</td>
+														<td>pending</td>
+														<td>{{candidate.notice_period}}</td>
+														<td>{{candidate.city}}</td>
+														<td>
+															<span class="box_i_e_type">
+																{% ifequal candidate.source.source_id.name 'Other' %}
+																	{{candidate.source.custom_source_name}}
+																{% else %}
+																	{{candidate.source.source_id.name}}
+																{% endifequal %}
+															</span>
+														</td>
+														<td class="action_icons">
+															<a href="{% url 'company:view_candidate' candidate.id %}"><i class="fas fa-eye"></i></a>
+															<a href=""><i class="fas fa-edit"></i></a>
+															<a href=""><i class="fas fa-trash-alt"></i></a>
+														</td>
+													</tr>
+												{% endfor %}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!--/div-->
+						</div>
+						<!-- /row -->
+					</div>
+					<!-- Main-content-body closed -->
+				</div>
+				<!-- Container-fluid closed -->
+{% endblock %}
+{% block script %}
+
+		<!-- Internal Data tables -->
+		<script src="{% static 'assets/plugins/datatable/js/jquery.dataTables.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/dataTables.dataTables.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/dataTables.responsive.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/responsive.dataTables.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/jquery.dataTables.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/dataTables.bootstrap4.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/dataTables.buttons.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/buttons.bootstrap4.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/jszip.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/pdfmake.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/vfs_fonts.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/buttons.html5.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/buttons.print.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/buttons.colVis.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/dataTables.responsive.min.js' %}"></script>
+		<script src="{% static 'assets/plugins/datatable/js/responsive.bootstrap4.min.js' %}"></script>
+
+		<!-- datatable js -->
+		<script src="{% static 'assets/js/table-data.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,96 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% block title %}Workflow Selection{% endblock %}
+{% block css %}
+<!--		<link href="{% static 'assets/css/ATS/workflow_configuration.css' %}" rel="stylesheet">-->
+{% endblock %}
+
+{% block main %}
+		<!-- Container-fluid -->
+		<div class="container-fluid" id="workflow-selection">
+			<!-- Main-content-body -->
+			<div class="main-content-body">
+				<!--middle section-->
+				<div class="row row-sm workflow-main-layout">
+					<div class="col-md-12 col-xl-12 col-xs-12 col-sm-12">
+					 <form method="post">
+						 {% csrf_token %}
+						 <div class="card">
+							  <div class="card-body">
+								  <div class="row row-sm mg-10">
+										<div class="col-lg col-md col-sm">
+											<div class="row row-sm mg-10">
+												<div class="col-md-4">
+													<p class="font-weight-bold">Proceed With Normal Workflow</p>
+												</div>
+												<div class="col-md-4">
+													<span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+												</div>
+												<div class="col-md-4">
+													<div class="radio-btn__tab">
+														<input name="custom-workflow" type="radio" value="custom" >
+													</div>
+												</div>
+											</div>
+											<div class="row row-sm mg-10">
+												<div class="col-md-4">
+
+												</div>
+											</div>
+										</div>
+								  </div>
+							  </div>
+					  	 </div>
+						 <div class="card">
+							<div class="card-body">
+								<div class="row row-sm mg-10">
+									<div class="col-lg col-md col-sm">
+										<div class="row row-sm mg-10">
+											<div class="col-md-4">
+												<p class="font-weight-bold">Proceed With Custom Workflow</p>
+											</div>
+											<div class="col-md-4">
+												<span>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</span>
+											</div>
+											<div class="col-md-4">
+												<div class="radio-btn__tab">
+													<input name="custom-workflow" type="radio" value="custom" checked>
+												</div>
+											</div>
+										</div>
+										<div class="row row-sm mg-10">
+											<div class="col-md-4"></div>
+											<div class="col-md-4">
+												<div class="row d-flex">
+													<label>Select Workflow:</label>
+													<select class="form-control" name="selected_workflow">
+														<option label="Select Workflow" class="null-selector"></option>
+														{% for workflow in workflows %}
+															<option value="{{workflow.id}}">{{workflow.name}}</option>
+														{% endfor %}
+													</select>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+					   </div>
+						 <div class="form-btn float-right">
+							 <button type="submit" class="btn btn-primary btn-sm rounded-10" id="finish-work-selection">Review & Publish
+							 </button>
+						 </div>
+					 </form>
+					</div>
+				 </div>
+				<!--middle section end-->
+			</div>
+			<!-- Main-content-body closed -->
+		</div>
+		<!-- Container-fluid closed -->
+{% endblock %}
+
+{% block script %}
+		<!-- Custom js -->
+<!--        <script src="{% static 'assets/js/ATS/workflow_configuration.js' %}"></script>-->
+{% endblock %}

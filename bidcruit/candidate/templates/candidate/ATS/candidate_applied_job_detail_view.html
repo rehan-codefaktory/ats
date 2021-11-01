@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>{{job_obj.job_title}}</h2><br>
+{% for stage in workflow_stages %}
+        {% ifequal stage.stage.name 'JCR' %}
+           {{stage.stage.name}} <a href="{% url 'candidate:candidate_jcr' stage.template.id job_obj.id %}"><button >Submit</button></a><hr>
+        {% endifequal %}
+        {% ifequal stage.stage.name 'Prerequisites' %}
+           {{stage.stage.name}} <a href="{% url 'candidate:prequisites_view' stage.template.id job_obj.id %}"><button >Submit</button></a><hr>
+        {% endifequal %}
+{% endfor %}
+</body>
+</html>

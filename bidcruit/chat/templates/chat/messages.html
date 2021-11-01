@@ -1,0 +1,82 @@
+{% extends 'chat/chats.html' %}
+{% load static %}
+{% load candidate_extras %}
+{% block message %}
+
+                                <div class="main-chat-body" id="ChatBody">
+                                    <div class="content-inner" id="board" style="max-height:400px;overflow:auto">
+                                        {% for message in messages %}
+                                            {% if curr_user == message.sender_name %}
+                                                <div class="media flex-row-reverse">
+                                                    <div class="main-img-user online"><img alt="" src="{{message.sender_name.id|get_user_image}}"></div>
+                                                    <div class="media-body">
+                                                        <div class="main-msg-wrapper">
+                                                            {{message.description}}
+                                                        </div>
+                                                        <div>
+                                                            <span>{{message.time}}</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% else %}
+                                            <div class="media">
+                                                <div class="main-img-user online"><img alt="" src="{{message.sender_name.id|get_user_image}}"></div>
+                                                <div class="media-body">
+                                                    <div class="main-msg-wrapper">
+                                                        {{message.description}}
+                                                    </div>
+                                                    <div>
+                                                        <span>{{message.time}}</span> <a href=""><i class="icon ion-android-more-horizontal"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+
+
+<script>
+function scrolltoend() {
+    $('#board').stop().animate({
+        scrollTop: $('#board')[0].scrollHeight
+    }, 800);
+}
+
+$(function () {
+    setInterval(receive, 1000)
+})
+
+const text = '<div class="media">'
+             + '<div class="main-img-user online">'
+             + '<img alt="" src="{% static 'chat/images/user_image.jpg' %}">'
+             + '</div>'
+             + '<div class="media-body">'
+             + '<div class="main-msg-wrapper">'
+             + '{description}'
+             + '</div>'
+             + '<div>'
+             + '<span>{time}</span>'
+             + '<a href=""><i class="icon ion-android-more-horizontal"></i></a>'
+             + '</div>'
+             + '</div>'
+             + '</div>'
+
+function receive(){
+    $.get('/chat/api/messages/' + sender_id + '/' + receiver_id, function(data){
+        if(data.length !== 0){
+            for(var i = 0; i < data.length; i++){
+                var field = text.replace('{description}', data[i].description);
+                var time = data[i].time.slice(0, 5) + ' a.m'
+                field = field.replace('{time}', time);
+                $('#board').append(field);
+                scrolltoend();
+            }
+        }
+    })
+}
+
+</script>
+
+{% endblock %}

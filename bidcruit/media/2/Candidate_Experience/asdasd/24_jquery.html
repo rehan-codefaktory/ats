@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/prashantchaudhary/ddslick/master/jquery.ddslick.min.js" ></script>   
+    <style>
+        .dd-select{
+            height: 60px !important;
+        }
+        .dd-selected-text {
+            line-height: 41px;
+        }
+    </style> 
+</head>
+<body>
+    <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+           <div class="control-group form-group">
+                <select id="demo-htmlselect">
+                    <option value="0" data-imagesrc="https://www.logo.wine/a/logo/Facebook/Facebook-f_Logo-Blue-Logo.wine.svg" max-width="100px" >Facebook</option>
+                    <option value="1" data-imagesrc="https://www.logo.wine/a/logo/Twitter/Twitter-Logo.wine.svg">Twitter</option>
+                    <option value="3" data-imagesrc="https://www.logo.wine/a/logo/Instagram/Instagram-Logo.wine.svg">Instagram</option>
+                </select>
+           </div>
+        </div>
+    </div>
+</div>
+    
+
+    <script>
+        $('#demo-htmlselect').ddslick({
+        onSelected: function(selectedData){
+        }   
+    });
+    </script>
+</body>
+
+
+</html>

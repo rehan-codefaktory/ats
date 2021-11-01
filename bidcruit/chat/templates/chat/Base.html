@@ -1,0 +1,108 @@
+
+	{% extends request.user.is_candidate|yesno:"candidate/base.html,company/base.html" %}
+
+{% load static %}
+
+
+{% load candidate_extras %}
+{% block css %}
+<!--		<link rel="stylesheet" href="{% static 'chat/css/chat.css' %}">-->
+		<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+{% endblock %}
+{% block main %}
+		<br>
+		<!-- Container-fluid -->
+		<div class="container-fluid">
+
+			<!-- Main-content-body -->
+			<div class="main-content-body">
+
+
+
+				<!-- row -->
+				<div class="row row-sm main-content-app mb-4">
+					<div class="col-xl-4 col-lg-12">
+						<div class="">
+							<div class="main-content-left main-content-left-chat card">
+								<nav class="nav main-nav-line main-nav-line-chat">
+									<a class="nav-link active" data-toggle="tab" href="#ChatList">Chat</a>
+								</nav>
+
+								<div class="tab-content main-chat-list">
+									<div class="tab-pane active" id="ChatList">
+										<div class="main-chat-list tab-pane" id="user-list" style="max-height:400px;overflow:auto">
+											<label class="main-content-label main-content-label-sm  ml-2 ">Recent Chats</label>
+											{% if friends %}
+												{% for friend in friends %}
+													<a href="{% url 'chat:chat' friend.email %}" class="media new">
+															<div class="main-img-user online">
+																<img alt="" src="{{friend.id|get_user_image}}"> <span></span>
+															</div>
+															<div class="media-body">
+																<div class="media-contact-name">
+																	{% if friend.is_candidate %}
+																		<span>{{friend.first_name}}</span>
+																	{% else %}
+																		<span>{{friend.company_name}}</span>
+																	{% endif %}
+																</div>
+															</div>
+													</a>
+												{% endfor %}
+											{% else %}
+												<div class="" style="line-height: 100px;">
+													<center><b>No Chat Requests</b></center>
+												</div>
+											{% endif %}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					{% if friends %}
+						{% block chat_messages_section %}
+						{% endblock %}
+					{% else %}
+					<div class="col-xl-8 col-lg-12">
+						<div class="">
+							<a class="main-header-arrow" href="" id="ChatBodyHide"><i
+									class="icon ion-md-arrow-back"></i></a>
+							<div class="main-content-body main-content-body-chat mt-0 pt-0 br-br-0 br-bl-0 mb-lg-0 card">
+								<div class="main-chat-header">
+									<div class="main-chat-msg-name">
+										<h6>No Messages</h6><small></small>
+									</div>
+								</div>
+								<!-- main-chat-header -->
+								<div class="messages">
+									<div class="main-chat-body" id="ChatBody">
+										<div class="content-inner" id="board" style="min-height:300px;overflow:auto;line-height: 300px;">
+											<center><b>No Messages</b></center>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="main-chat-footer">
+								<form>
+									<div class="row">
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+                    {% endif %}
+
+
+				</div>
+				<!-- /row -->
+			</div>
+		</div>
+
+	{% block script %}
+ 		<script type="text/javascript" src="{% static 'chat/js/chat.js' %}"></script>
+    	<script type="text/javascript" src="{% static 'chat/js/materialize.min.js' %}"></script>
+	{% endblock %}
+
+{% endblock %}
+

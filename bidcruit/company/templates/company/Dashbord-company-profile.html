@@ -1,0 +1,144 @@
+{% extends 'company/base.html' %}
+{% load static %}
+{% load candidate_extras %}
+{% block title %}Company Profile{% endblock %}
+
+{% block main %}
+			
+		<div class="container-fluid">
+		<br>
+				<!-- Main-content-body -->
+				<div class="main-content-body edit-profile-wrap">
+
+
+					<!-- row -->
+					<div class="row row-sm">
+						<div class="col-md-12 col-xl-12 col-lg-12">
+							<div class="card">
+
+								<div class="card-body ">
+								<div class="view-company-profile row">
+                                    <div class="col-lg-3 col-sm-4 col-xs-12">
+                                        <div class="sidebar-com-prof-view">
+                                            <div class="logo-view-fp">
+                                                <img src="{{profile.company_logo.url}}">
+                                            </div>
+                                            <div class="logo-view-scan">
+                                                <img src="{% static 'assets/img/scancode.png' %}">
+                                            </div>
+                                            <div class="social-for-company-view">
+                                                <ul>
+                                                    <li>
+                                                        <a href="#"><i  class="fab fa-facebook-f"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i  class="fab fa-instagram"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i class="fab fa-twitter"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i  class="fab fa-linkedin-in"></i></a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="#"><i  class="fab fa-behance"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-sm-8 col-xs-12">
+                                        <div class="rgt-detail-of-company">
+                                            <div class="heading-for-com-detail">
+                                                <h2>{{profile.company_id.company_name}} </h2>
+                                                <h3>{{profile.compnay_type}}</h3>
+                                            </div>
+                                            <div class="detailed-view">
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-globe"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.company_id.website}} {% if request.user.is_company %}<span class="edit-icn-d"><a href="{% url 'company:add_edit_profile' %}"><i data-v-e08301e8="" class="fas fa-edit"></i></a></span>{% endif %}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-envelope-open-text"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.company_id.email}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-phone-volume"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.contact_no1}}/{{profile.contact_no2}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-building"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.compnay_type}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-map-marker-alt"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.address}},{{profile.city.city_name}}-{{profile.zip_code}},{{profile.state.state_name}},{{profile.country.country_name}}.</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-calendar-alt"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>Founded Year - {{profile.founded_year}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-users"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.employee_count}}</p>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row-sub-detail">
+                                                    <div class="detal-icon">
+                                                        <i data-v-e08301e8="" class="fas fa-magic"></i>
+                                                    </div>
+                                                    <div class="rgt-ftl-view">
+                                                        <p>{{profile.speciality}}.</p>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+					<!-- /row -->
+				</div>
+
+{% endblock %}
+
+
+
+
